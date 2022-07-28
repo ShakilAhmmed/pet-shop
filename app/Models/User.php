@@ -6,11 +6,10 @@ namespace App\Models;
 use App\Traits\UUIDAble;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
-use Str;
 
 /**
  * App\Models\User
@@ -102,12 +101,12 @@ class User extends Authenticatable
     protected function password(): Attribute
     {
         return Attribute::make(
-            set: fn($value) => Hash::make($value),
+            set: fn ($value) => Hash::make($value),
         );
     }
 
-    public function tokens(): HasMany
+    public function tokens(): HasOne
     {
-        return $this->hasMany(JwtToken::class, 'user_id', 'id');
+        return $this->hasOne(JwtToken::class, 'user_id', 'id');
     }
 }
