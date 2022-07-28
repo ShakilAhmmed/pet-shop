@@ -1,0 +1,88 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Pet Shop API - Swagger Documentation",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/admin/create": {
+            "post": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Create an Admin account",
+                "operationId": "admin-create",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "first_name",
+                                    "last_name",
+                                    "email",
+                                    "password",
+                                    "password_confirmation",
+                                    "address",
+                                    "phone_number"
+                                ],
+                                "properties": {
+                                    "first_name": {
+                                        "description": "User firstname",
+                                        "type": "text"
+                                    },
+                                    "last_name": {
+                                        "description": "User lastname",
+                                        "type": "text"
+                                    },
+                                    "email": {
+                                        "description": "User email",
+                                        "type": "text"
+                                    },
+                                    "password": {
+                                        "description": "User password",
+                                        "type": "password"
+                                    },
+                                    "password_confirmation": {
+                                        "description": "User password",
+                                        "type": "password"
+                                    },
+                                    "address": {
+                                        "description": "User main address",
+                                        "type": "text"
+                                    },
+                                    "phone_number": {
+                                        "description": "User main phone number",
+                                        "type": "text"
+                                    },
+                                    "is_marketing": {
+                                        "description": "User marketing preferences",
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    },
+                    "422": {
+                        "description": "Validation Failed"
+                    }
+                }
+            }
+        }
+    }
+}
