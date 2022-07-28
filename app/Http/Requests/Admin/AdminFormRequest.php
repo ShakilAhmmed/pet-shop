@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use App\Enums\AdminStatus;
+use App\Enums\MarketingStatus;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AdminFormRequest extends FormRequest
@@ -45,7 +46,7 @@ class AdminFormRequest extends FormRequest
             'password' => $this->input('password'),
             'address' => $this->input('address'),
             'phone_number' => $this->input('phone_number'),
-            'is_marketing' => $this->input('is_marketing'),
+            'is_marketing' => $this->input('is_marketing', MarketingStatus::NO),
         ];
     }
 }
