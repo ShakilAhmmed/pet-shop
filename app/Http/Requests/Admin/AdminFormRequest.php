@@ -36,6 +36,9 @@ class AdminFormRequest extends FormRequest
         ];
     }
 
+    /**
+     * @return array
+     */
     public function fields(): array
     {
         return [

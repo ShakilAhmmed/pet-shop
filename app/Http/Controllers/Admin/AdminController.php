@@ -69,7 +69,7 @@ class AdminController extends Controller
      *     ),
      * ),
      */
-    public function store(AdminFormRequest $request, User $user)
+    public function store(AdminFormRequest $request, User $user): JsonResponse
     {
         try {
             $user->fill($request->fields())->save();

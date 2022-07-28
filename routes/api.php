@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,5 +24,6 @@ Route::group(['prefix' => '/v1'], function () {
 
     Route::group(['prefix' => '/admin'], function () {
         Route::post('/create', [AdminController::class, 'store']);
+        Route::post('/login', [LoginController::class, 'login']);
     });
 });
