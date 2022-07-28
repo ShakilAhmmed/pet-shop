@@ -8,6 +8,7 @@ use App\Http\Resources\Admin\AdminResource;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @OA\Info(
@@ -72,7 +73,7 @@ class AdminController extends Controller
     {
         try {
             $user->fill($request->fields())->save();
-            return $this->successResponse(new AdminResource($user), 'admin created successfully');
+            return $this->successResponse(new AdminResource($user), 'admin created successfully', Response::HTTP_CREATED);
         } catch (Exception $exception) {
             return $this->errorResponse($exception->getMessage());
         }
