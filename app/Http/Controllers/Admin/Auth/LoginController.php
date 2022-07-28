@@ -78,4 +78,10 @@ class LoginController extends Controller
             return $this->errorResponse($exception->getMessage());
         }
     }
+
+
+    public function logout()
+    {
+        //TODO;
+    }
 }

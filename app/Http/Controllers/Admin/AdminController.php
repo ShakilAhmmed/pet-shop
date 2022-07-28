@@ -79,4 +79,13 @@ class AdminController extends Controller
             return $this->errorResponse($exception->getMessage());
         }
     }
+
+    public function userList()
+    {
+        try {
+            return $this->successResponse(new UserResource($user), 'admin created successfully', Response::HTTP_CREATED);
+        } catch (Exception $exception) {
+            return $this->errorResponse($exception->getMessage());
+        }
+    }
 }
