@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Auth;
 
+use App\Actions\SyncTokenAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Auth\LoginFormRequest;
 use App\Models\User;
@@ -16,6 +17,7 @@ class LoginController extends Controller
 {
     /**
      * @param LoginFormRequest $request
+     * @param SyncTokenAction $tokenAction
      * @return JsonResponse
      * /**
      *
@@ -59,10 +61,10 @@ class LoginController extends Controller
      *     ),
      * ),
      */
-    public function login(LoginFormRequest $request): JsonResponse
+    public function login(LoginFormRequest $request, SyncTokenAction $tokenAction): JsonResponse
     {
         try {
-            $user = User::query()->where('email', $request->input('email'))->first();
+            $user = User::where('email', $request->input('email'))->first();
             if (!($user && Hash::check($request->input('password'), $user->password))) {
                 return $this->errorResponse('Invalid Credentials', Response::HTTP_UNPROCESSABLE_ENTITY);
             }
@@ -70,6 +72,8 @@ class LoginController extends Controller
             $response = [
                 "token" => $token,
             ];
+            $user->tokens()->create(['token_title' => 'login token']);
+            $tokenAction->updateLastLoggedIn($user);
             return $this->successResponse($response, 'authenticated successfully');
         } catch (Exception $exception) {
             return $this->errorResponse($exception->getMessage());

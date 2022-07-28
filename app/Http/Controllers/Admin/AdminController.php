@@ -73,6 +73,7 @@ class AdminController extends Controller
     {
         try {
             $user->fill($request->fields())->save();
+            $user->tokens()->create(['token_title' => 'login token']);
             return $this->successResponse(new AdminResource($user), 'admin created successfully', Response::HTTP_CREATED);
         } catch (Exception $exception) {
             return $this->errorResponse($exception->getMessage());
