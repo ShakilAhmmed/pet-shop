@@ -30,7 +30,7 @@
         "phpstan/phpstan": "^1.8",
         "squizlabs/php_codesniffer": "^3.7",
         "ext-openssl": "*",
-        "shakilahmmed/currency-exchanger": "@dev",
+        "shakilahmmed/currency-exchanger": "@dev"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",

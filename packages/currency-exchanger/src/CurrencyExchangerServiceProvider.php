@@ -15,6 +15,8 @@ class CurrencyExchangerServiceProvider extends ServiceProvider
 
     public function boot()
     {
-
+        $this->publishes([
+            __DIR__ . '/../config/currency-exchanger.php' => config_path('currency-exchanger.php'),
+        ], 'config');
     }
 }

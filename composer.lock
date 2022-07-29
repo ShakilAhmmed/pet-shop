@@ -6770,7 +6770,10 @@
             "dist": {
                 "type": "path",
                 "url": "packages/currency-exchanger",
-                "reference": "98fa664bec51e7ee89a0db8f7890b5d8e755079a"
+                "reference": "e8f8369379c8862f658c9de8939b06a5dd501799"
+            },
+            "require": {
+                "ext-libxml": "*"
             },
             "type": "library",
             "extra": {
