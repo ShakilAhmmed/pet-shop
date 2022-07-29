@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
-use App\Exceptions\InvalidTokenException;
+use App\Exceptions\InvalidToken;
 use App\Models\JwtToken;
 use App\Models\User;
 use App\Services\JWTService\JWTService;
@@ -39,11 +39,11 @@ class AuthServiceProvider extends ServiceProvider
                         ->whereNotNull('expires_at')
                         ->first();
                     if ($isInvalid) {
-                        throw new InvalidTokenException('Token Expired');
+                        throw new InvalidToken('Token Expired');
                     }
                     $user = JWTService::make()->decodeToken($token);
                     if (! $user) {
-                        throw new InvalidTokenException();
+                        throw new InvalidToken();
                     }
                 } catch (Exception $e) {
                     return null;

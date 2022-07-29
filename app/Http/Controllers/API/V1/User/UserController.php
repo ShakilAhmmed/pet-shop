@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers\API\V1\User;
 
-use App\Actions\SyncTokenAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\AdminFormRequest;
 use App\Http\Requests\User\UserFormRequest;
 use App\Http\Resources\Admin\AdminResource;
 use App\Models\User;

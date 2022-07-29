@@ -92,7 +92,6 @@ class AdminController extends Controller
     }
 
     /**
-     *
      * @OA\Get(
      *     path="/api/v1/admin/user-listing",
      *     summary="List all users",
@@ -225,7 +224,6 @@ class AdminController extends Controller
             return $this->errorResponse($exception->getMessage());
         }
     }
-
 
     /**
      * @param UserFormRequest $request

@@ -88,7 +88,6 @@ class AuthenticateController extends Controller
         }
     }
 
-
     /**
      * @return JsonResponse
      * /**

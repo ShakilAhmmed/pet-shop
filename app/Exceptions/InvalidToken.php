@@ -4,7 +4,6 @@ namespace App\Exceptions;
 
 use Exception;
 
-class InvalidTokenException extends Exception
+class InvalidToken extends Exception
 {
-
 }

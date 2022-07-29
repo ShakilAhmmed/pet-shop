@@ -29,8 +29,10 @@ class AdminFormRequest extends FormRequest
         return [
             'first_name' => ['required', 'min:3'],
             'last_name' => ['required', 'min:3'],
-            'email' => ['required', 'email',
-                Rule::unique('users', 'email')->ignore($this->route('id'))
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users', 'email')->ignore($this->route('id')),
             ],
             'password' => ['required', 'min:8'],
             'password_confirmation' => ['required'],

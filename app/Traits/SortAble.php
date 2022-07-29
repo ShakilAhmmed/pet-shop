@@ -2,8 +2,9 @@
 
 namespace App\Traits;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Eloquent\Builder;
+
 
 trait SortAble
 {
