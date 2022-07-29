@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\V1\Admin\AdminController;
-use App\Http\Controllers\API\V1\Admin\Auth\LoginController;
+use App\Http\Controllers\API\V1\Admin\Auth\AuthenticateController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +24,9 @@ Route::group(['prefix' => '/v1'], function () {
 
     Route::group(['prefix' => '/admin'], function () {
         Route::post('/create', [AdminController::class, 'store']);
-        Route::post('/login', [LoginController::class, 'login']);
+        Route::post('/login', [AuthenticateController::class, 'login']);
+        Route::post('/logout', [AuthenticateController::class, 'logout'])->middleware('auth:api');
+
+
     });
 });

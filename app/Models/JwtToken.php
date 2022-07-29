@@ -49,8 +49,12 @@ class JwtToken extends Model
         'uuid',
         'user_id',
         'token_title',
+        'token',
         'restrictions',
         'permissions',
+        'last_used_at',
+        'expires_at',
+        'refreshed_at'
     ];
 
     public function user(): BelongsTo

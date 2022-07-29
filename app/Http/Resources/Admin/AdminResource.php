@@ -26,7 +26,7 @@ class AdminResource extends JsonResource
             'phone_number' => $this->phone_number,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'token' => JWTService::for($this->uuid)->createToken(),
+            'token' => '',
         ];
     }
 }

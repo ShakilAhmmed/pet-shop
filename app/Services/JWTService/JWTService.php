@@ -16,20 +16,25 @@ class JWTService
 
     private array $payload;
 
-    private function __construct($payload)
+    private function __construct()
     {
         $this->privateKey = $this->setPrivateKey();
         $this->publicKey = $this->setPublicKey();
+    }
+
+    public static function make(): JWTService
+    {
+        return new static();
+    }
+
+    public function setPayload($payload): JWTService
+    {
         $this->payload = [
             'serverDomain' => request()->getHttpHost(),
             'expiresAt' => $this->expiresIn(),
             'uuid' => $payload
         ];
-    }
-
-    public static function for($payload): JWTService
-    {
-        return new static($payload);
+        return $this;
     }
 
     public function getPrivateKey(): OpenSSLAsymmetricKey
@@ -39,7 +44,7 @@ class JWTService
 
     public function setPrivateKey(): OpenSSLAsymmetricKey
     {
-        return openssl_get_privatekey(file_get_contents(base_path(config('app.jwt_private_key_path'))), config('app.jwt_pass_phrase'));
+        return openssl_get_privatekey(file_get_contents(base_path(config('jwt.jwt_private_key_path'))), config('jwt.jwt_pass_phrase'));
     }
 
     public function getPublicKey(): OpenSSLAsymmetricKey
@@ -49,7 +54,7 @@ class JWTService
 
     public function setPublicKey(): OpenSSLAsymmetricKey
     {
-        return openssl_get_publickey(file_get_contents(base_path(config('app.jwt_public_key_path'))));
+        return openssl_get_publickey(file_get_contents(base_path(config('jwt.jwt_public_key_path'))));
     }
 
     public function getPayload(): array
@@ -70,6 +75,6 @@ class JWTService
 
     public function expiresIn(): float|int
     {
-        return time() + 60 * 60 * 24 * config('app.jwt_expires_in_day');
+        return time() + 60 * 60 * 24 * config('jwt.jwt_expires_in_day');
     }
 }

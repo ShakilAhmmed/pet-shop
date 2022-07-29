@@ -1,14 +1,19 @@
 <?php
 
 namespace App\Http\Controllers\API\V1\Admin;
+
+use App\Actions\SyncTokenAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AdminFormRequest;
 use App\Http\Resources\Admin\AdminResource;
 use App\Http\Resources\User\UserResource;
 use App\Models\User;
+use App\Services\JWTService\JWTService;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
+use Throwable;
 
 /**
  * @OA\Info(
@@ -22,6 +27,7 @@ class AdminController extends Controller
     /**
      * @param AdminFormRequest $request
      * @param User $user
+     * @param SyncTokenAction $tokenAction
      * @return JsonResponse
      *
      * @OA\Post(
@@ -68,12 +74,16 @@ class AdminController extends Controller
      *        description="Validation Failed",
      *     ),
      * ),
+     * @throws Throwable
      */
-    public function store(AdminFormRequest $request, User $user): JsonResponse
+    public function store(AdminFormRequest $request, User $user, SyncTokenAction $tokenAction): JsonResponse
     {
         try {
+            DB::beginTransaction();
             $user->fill($request->fields())->save();
-            $user->tokens()->create(['token_title' => 'login token']);
+            $token = JWTService::make()->setPayload($user->uuid)->createToken();
+            $user->tokens()->create(['token_title' => 'login token', 'token' => $token]);
+            DB::commit();
             return $this->successResponse(new AdminResource($user), 'admin created successfully', Response::HTTP_CREATED);
         } catch (Exception $exception) {
             return $this->errorResponse($exception->getMessage());

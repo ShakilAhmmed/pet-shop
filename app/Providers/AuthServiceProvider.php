@@ -3,7 +3,13 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+use App\Exceptions\InvalidTokenException;
+use App\Models\JwtToken;
+use App\Models\User;
+use App\Services\JWTService\JWTService;
+use Exception;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -21,10 +27,35 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->registerPolicies();
 
+        Auth::viaRequest('jwt', function ($request) {
+            $token = $request->bearerToken();
+
+            if ($token && strlen($token) > 0) {
+                try {
+                    $isInvalid = JwtToken::query()->where('token', $token)
+                        ->whereNotNull('expires_at')
+                        ->first();
+
+                    if ($isInvalid) {
+                        throw new InvalidTokenException("Token Expired");
+                    }
+                    $user = JWTService::make()->decodeToken($token);
+                    if (!$user) {
+                        throw new InvalidTokenException();
+                    }
+                } catch (Exception $e) {
+                    return null;
+                }
+
+                return User::query()->where('uuid', $user['uuid'])->first();
+            }
+
+            return null;
+        });
         //
     }
 }
