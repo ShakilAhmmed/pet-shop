@@ -29,9 +29,9 @@ API Provider application for PET-SHOP
 
 ```bash
     JWT_EXPIRES_IN_DAY=3
-    JWT_PRIVATE_KEY_PATH=private.pem
-    JWT_PUBLIC_KEY_PATH=public.pem
-    JWT_PASS_PHRASE=2083
+    JWT_PRIVATE_KEY_PATH=/path/to/private.pem
+    JWT_PUBLIC_KEY_PATH=/path/to/public.pem
+    JWT_PASS_PHRASE=
 ```
 
 ### Implemented API ENDPOINTS
