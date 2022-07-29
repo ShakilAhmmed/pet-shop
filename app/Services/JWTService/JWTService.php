@@ -9,7 +9,6 @@ use OpenSSLAsymmetricKey;
 class JWTService
 {
     public const ALGO = 'RS256';
-    public const PASS_PHRASE = '2083';
 
     private OpenSSLAsymmetricKey $privateKey;
 
@@ -40,7 +39,7 @@ class JWTService
 
     public function setPrivateKey(): OpenSSLAsymmetricKey
     {
-        return openssl_get_privatekey(file_get_contents(base_path('private.pem')), self::PASS_PHRASE);
+        return openssl_get_privatekey(file_get_contents(base_path(config('app.jwt_private_key_path'))), config('app.jwt_pass_phrase'));
     }
 
     public function getPublicKey(): OpenSSLAsymmetricKey
@@ -50,7 +49,7 @@ class JWTService
 
     public function setPublicKey(): OpenSSLAsymmetricKey
     {
-        return openssl_get_publickey(file_get_contents(base_path('public.pem')));
+        return openssl_get_publickey(file_get_contents(base_path(config('app.jwt_public_key_path'))));
     }
 
     public function getPayload(): array
@@ -63,10 +62,9 @@ class JWTService
         return JWT::encode($this->getPayload(), $this->getPrivateKey(), self::ALGO);
     }
 
-    public function decodeToken(): array
+    public function decodeToken($token): array
     {
-        $decoded = JWT::decode($this->createToken(), new Key($this->getPublicKey(), self::ALGO));
-
+        $decoded = JWT::decode($token, new Key($this->getPublicKey(), self::ALGO));
         return (array)$decoded;
     }
 

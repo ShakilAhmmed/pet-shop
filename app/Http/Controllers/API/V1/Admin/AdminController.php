@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
-
+namespace App\Http\Controllers\API\V1\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AdminFormRequest;
 use App\Http\Resources\Admin\AdminResource;
+use App\Http\Resources\User\UserResource;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\JsonResponse;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Auth;
+namespace App\Http\Controllers\API\V1\Admin\Auth;
 
 use App\Actions\SyncTokenAction;
 use App\Http\Controllers\Controller;
