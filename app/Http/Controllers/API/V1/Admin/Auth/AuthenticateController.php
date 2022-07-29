@@ -80,9 +80,7 @@ class AuthenticateController extends Controller
                 return $this->successResponse($response, 'authenticated successfully');
             }
             $token = JWTService::make()->setPayload($user->uuid)->createToken();
-            $response = [
-                "token" => $token,
-            ];
+            $response['token'] = $token;
             DB::beginTransaction();
             $user->tokens()->create(['token_title' => 'login token', 'token' => $token]);
             $tokenAction->attach($user, $token);
