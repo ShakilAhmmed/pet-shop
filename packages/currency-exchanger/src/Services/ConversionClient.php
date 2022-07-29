@@ -3,6 +3,7 @@
 namespace Shakilahmmed\CurrencyExchanger\Services;
 
 use Shakilahmmed\CurrencyExchanger\CurrencyConvert;
+use Shakilahmmed\CurrencyExchanger\DTO\CurrencyDTO;
 
 class ConversionClient
 {
@@ -10,23 +11,23 @@ class ConversionClient
 
     private const EUR = 'EUR';
 
-    private CurrencyConvert $currencyConvert;
+    private CurrencyDTO $currencyDTO;
 
     private $xmlResponse;
     private $attributes;
 
-    private function __construct(CurrencyConvert $currencyConvert)
+    private function __construct(CurrencyDTO $currencyDTO)
     {
-        $this->currencyConvert = $currencyConvert;
+        $this->currencyDTO = $currencyDTO;
         $xml = simpleXML_load_file($this->apiBaseUri, "SimpleXMLElement", LIBXML_NOCDATA);
         $xml = json_encode($xml);
         $this->xmlResponse = json_decode($xml, true);
         $this->formatAttributes();
     }
 
-    public static function using(CurrencyConvert $currencyConvert): ConversionClient
+    public static function using(CurrencyDTO $currencyDTO): ConversionClient
     {
-        return new static($currencyConvert);
+        return new static($currencyDTO);
     }
 
     private function formatAttributes(): void
@@ -43,12 +44,12 @@ class ConversionClient
         }
     }
 
-    public function getRate()
+    public function getRate(): float|int
     {
         $rate = 0;
-        $amount = $this->currencyConvert->getAmount();
-        $fromCurrency = $this->currencyConvert->getFromCurrency();
-        $toCurrency = $this->currencyConvert->getToCurrency();
+        $amount = $this->currencyDTO->getAmount();
+        $fromCurrency = $this->currencyDTO->getFromCurrency();
+        $toCurrency = $this->currencyDTO->getToCurrency();
 
         if ($this->isSameCurrency()) {
             return 0;
@@ -71,19 +72,18 @@ class ConversionClient
 
     public function isSameCurrency(): bool
     {
-        return $this->currencyConvert->getFromCurrency() === $this->currencyConvert->getToCurrency();
+        return $this->currencyDTO->getFromCurrency() === $this->currencyDTO->getToCurrency();
     }
 
     public function isFromCurrencyEur(): bool
     {
-        return $this->currencyConvert->getFromCurrency() === self::EUR;
+        return $this->currencyDTO->getFromCurrency() === self::EUR;
     }
 
     public function isToCurrencyEur(): bool
     {
-        return $this->currencyConvert->getToCurrency() === self::EUR;
+        return $this->currencyDTO->getToCurrency() === self::EUR;
     }
-
 
     private function cost(string $currency): float
     {

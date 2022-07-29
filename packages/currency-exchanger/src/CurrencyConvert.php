@@ -2,15 +2,16 @@
 
 namespace Shakilahmmed\CurrencyExchanger;
 
+use Shakilahmmed\CurrencyExchanger\DTO\CurrencyDTO;
 use Shakilahmmed\CurrencyExchanger\Services\ConversionClient;
 
 class CurrencyConvert
 {
-    private $fromCurrency;
+    private string $fromCurrency;
 
-    private $toCurrency;
+    private string $toCurrency;
 
-    private $amount;
+    private float $amount;
 
     public function from($fromCurrency): CurrencyConvert
     {
@@ -30,23 +31,10 @@ class CurrencyConvert
         return $this;
     }
 
-    public function getFromCurrency()
-    {
-        return $this->fromCurrency;
-    }
-
-    public function getToCurrency()
-    {
-        return $this->toCurrency;
-    }
-
-    public function getAmount()
-    {
-        return $this->amount;
-    }
-
     public function get(): float|int
     {
-        return ConversionClient::using($this)->getRate();
+        return ConversionClient::using(
+            new CurrencyDTO($this->fromCurrency, $this->toCurrency, $this->amount)
+        )->getRate();
     }
 }
