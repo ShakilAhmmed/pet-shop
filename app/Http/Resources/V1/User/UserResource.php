@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Resources\Admin;
+namespace App\Http\Resources\V1\User;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Carbon;
 
-class AdminResource extends JsonResource
+class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -22,9 +23,9 @@ class AdminResource extends JsonResource
             'email' => $this->email,
             'address' => $this->address,
             'phone_number' => $this->phone_number,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'token' => $this->hasValidToken()->token,
+            'created_at' => Carbon::make($this->created_at)->format('Y-m-d'),
+            'updated_at' => Carbon::make($this->updated_at)->format('Y-m-d'),
+            'token' => optional($this->hasValidToken())->token,
         ];
     }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API\V1\User\Auth;
 use App\Actions\SyncTokenAction;
 use App\Enums\AdminStatus;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Auth\LoginFormRequest;
+use App\Http\Requests\V1\Admin\Auth\LoginFormRequest;
 use App\Models\User;
 use App\Services\JWTService\JWTService;
 use Exception;

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\API\V1\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\User\UserFormRequest;
-use App\Http\Resources\Admin\AdminResource;
+use App\Http\Requests\V1\User\UserFormRequest;
+use App\Http\Resources\V1\Admin\AdminResource;
 use App\Models\User;
 use App\Services\JWTService\JWTService;
 use Exception;

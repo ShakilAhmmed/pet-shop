@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests\V1\User;
 
 use App\Enums\AdminStatus;
 use App\Enums\MarketingStatus;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class AdminFormRequest extends FormRequest
+class UserFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,9 +29,7 @@ class AdminFormRequest extends FormRequest
         return [
             'first_name' => ['required', 'min:3'],
             'last_name' => ['required', 'min:3'],
-            'email' => [
-                'required',
-                'email',
+            'email' => ['required', 'email',
                 Rule::unique('users', 'email')->ignore($this->route('id')),
             ],
             'password' => ['required', 'min:8'],
@@ -49,7 +47,7 @@ class AdminFormRequest extends FormRequest
         return [
             'first_name' => $this->input('first_name'),
             'last_name' => $this->input('last_name'),
-            'is_admin' => AdminStatus::YES,
+            'is_admin' => AdminStatus::NO,
             'email' => $this->input('email'),
             'password' => $this->input('password'),
             'address' => $this->input('address'),

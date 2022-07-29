@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\API\V1\Admin;
 
-use App\Actions\SyncTokenAction;
 use App\Filters\DefineFilter;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\AdminFormRequest;
-use App\Http\Requests\User\UserFormRequest;
-use App\Http\Resources\Admin\AdminResource;
-use App\Http\Resources\User\UserResource;
+use App\Http\Requests\V1\Admin\AdminFormRequest;
+use App\Http\Requests\V1\User\UserFormRequest;
+use App\Http\Resources\V1\Admin\AdminResource;
+use App\Http\Resources\V1\User\UserResource;
 use App\Models\User;
 use App\Services\JWTService\JWTService;
 use Exception;

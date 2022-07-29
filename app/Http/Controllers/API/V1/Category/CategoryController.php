@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\API\V1\Category;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\AdminFormRequest;
-use App\Http\Requests\Category\CategoryFormRequest;
-use App\Http\Resources\Category\CategoryResource;
+use App\Http\Requests\V1\Category\CategoryFormRequest;
+use App\Http\Resources\V1\Category\CategoryResource;
 use App\Models\Category;
-use App\Models\User;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
