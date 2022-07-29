@@ -3,7 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\AdminStatus;
+use App\Traits\SortAble;
 use App\Traits\UUIDAble;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -61,6 +64,7 @@ class User extends Authenticatable
     use HasFactory;
     use Notifiable;
     use UUIDAble;
+    use SortAble;
 
     /**
      * The attributes that are mass assignable.
@@ -102,7 +106,7 @@ class User extends Authenticatable
     protected function password(): Attribute
     {
         return Attribute::make(
-            set: fn ($value) => Hash::make($value),
+            set: fn($value) => Hash::make($value),
         );
     }
 
@@ -114,5 +118,10 @@ class User extends Authenticatable
     public function hasValidToken()
     {
         return $this->tokens()->whereNull('expires_at')->first();
+    }
+
+    public function scopeUser(Builder $query): Builder
+    {
+        return $query->where('is_admin', AdminStatus::NO);
     }
 }

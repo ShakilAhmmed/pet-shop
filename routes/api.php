@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\API\V1\Admin\AdminController;
 use App\Http\Controllers\API\V1\Admin\Auth\AuthenticateController;
+use App\Http\Controllers\API\V1\User\Auth\UserAuthenticateController;
+use App\Http\Controllers\API\V1\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,8 +27,22 @@ Route::group(['prefix' => '/v1'], function () {
     Route::group(['prefix' => '/admin'], function () {
         Route::post('/create', [AdminController::class, 'store']);
         Route::post('/login', [AuthenticateController::class, 'login']);
-        Route::post('/logout', [AuthenticateController::class, 'logout'])->middleware('auth:api');
+
+        Route::middleware('auth:api')->group(function () {
+            Route::post('/logout', [AuthenticateController::class, 'logout']);
+            Route::get('/user-listing', [AdminController::class, 'userList']);
+            Route::put('/user-edit/{uuid}', [AdminController::class, 'userEdit']);
+            Route::delete('/user-delete/{uuid}', [AdminController::class, 'userDelete']);
+        });
 
 
     });
+
+    Route::group(['prefix' => '/user'], function () {
+        Route::post('/create', [UserController::class, 'store']);
+        Route::post('/login', [UserAuthenticateController::class, 'login']);
+        Route::post('/logout', [UserAuthenticateController::class, 'logout'])->middleware('auth:api');
+    });
+
+
 });
