@@ -15,5 +15,5 @@ use Shakilahmmed\CurrencyExchanger\Facades\CurrencyConversion;
 */
 
 Route::get('/', function () {
-    dd(CurrencyConversion::convert()->from('EUR')->to('USD')->amount(100)->get());
+    return view('welcome');
 });
