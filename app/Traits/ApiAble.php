@@ -20,7 +20,7 @@ trait ApiAble
         return response()->json([
             'status' => 'Success',
             'message' => $message,
-            "code" => $code,
+            'code' => $code,
             'data' => $data,
         ], $code);
     }
@@ -37,7 +37,7 @@ trait ApiAble
         return response()->json([
             'status' => 'Error',
             'message' => $message,
-            "code" => $code,
+            'code' => $code,
             'data' => null,
         ], $code);
     }

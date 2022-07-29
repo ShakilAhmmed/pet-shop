@@ -7,10 +7,10 @@ use Illuminate\Support\Facades\Schema;
 
 trait SortAble
 {
-    public function scopeSort(Builder $builder, ?string $column, bool $isDesc)
+    public function scopeSort(Builder $builder, ?string $column, bool $isDesc): void
     {
         $direction = $isDesc ? 'desc' : 'asc';
-        if (!empty($column) && Schema::hasColumn($this->getTable(), $column)) {
+        if (! empty($column) && Schema::hasColumn($this->getTable(), $column)) {
             $builder->orderBy($column, $direction);
         } elseif (Schema::hasColumn($this->getTable(), 'created_at')) {
             $builder->orderBy('created_at', $direction);

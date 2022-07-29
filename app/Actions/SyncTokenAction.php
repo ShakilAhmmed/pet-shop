@@ -14,14 +14,14 @@ class SyncTokenAction
         ]);
 
         $user->tokens()->where('token', $token)->update([
-            'last_used_at' => now()
+            'last_used_at' => now(),
         ]);
     }
 
     public function detach(User $user): void
     {
         $user->tokens()->whereNull('expires_at')->update([
-            'expires_at' => now()
+            'expires_at' => now(),
         ]);
     }
 }

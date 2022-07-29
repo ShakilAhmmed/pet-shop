@@ -32,7 +32,7 @@ class JWTService
         $this->payload = [
             'serverDomain' => request()->getHttpHost(),
             'expiresAt' => $this->expiresIn(),
-            'uuid' => $payload
+            'uuid' => $payload,
         ];
         return $this;
     }
@@ -70,7 +70,7 @@ class JWTService
     public function decodeToken($token): array
     {
         $decoded = JWT::decode($token, new Key($this->getPublicKey(), self::ALGO));
-        return (array)$decoded;
+        return (array) $decoded;
     }
 
     public function expiresIn(): float|int

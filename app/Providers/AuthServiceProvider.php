@@ -41,10 +41,10 @@ class AuthServiceProvider extends ServiceProvider
                         ->first();
 
                     if ($isInvalid) {
-                        throw new InvalidTokenException("Token Expired");
+                        throw new InvalidTokenException('Token Expired');
                     }
                     $user = JWTService::make()->decodeToken($token);
-                    if (!$user) {
+                    if (! $user) {
                         throw new InvalidTokenException();
                     }
                 } catch (Exception $e) {

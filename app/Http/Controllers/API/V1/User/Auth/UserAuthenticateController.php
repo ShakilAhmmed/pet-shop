@@ -64,16 +64,14 @@ class UserAuthenticateController extends Controller
     public function login(LoginFormRequest $request, SyncTokenAction $tokenAction): JsonResponse
     {
         try {
-
             $user = User::where([
                 'email' => $request->input('email'),
                 'is_admin' => AdminStatus::NO,
             ])->first();
 
-            if (!($user && Hash::check($request->input('password'), $user->password))) {
+            if (! ($user && Hash::check($request->input('password'), $user->password))) {
                 return $this->errorResponse('Invalid Credentials', Response::HTTP_UNPROCESSABLE_ENTITY);
             }
-
             $response = [];
             if ($user->hasValidToken()) {
                 $response['token'] = $user->hasValidToken()->token;

@@ -91,7 +91,6 @@ class AdminController extends Controller
         }
     }
 
-
     /**
      *
      * @OA\Get(

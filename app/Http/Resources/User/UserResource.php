@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources\User;
 
-use App\Services\JWTService\JWTService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Carbon;

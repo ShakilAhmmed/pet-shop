@@ -37,6 +37,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|JwtToken whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JwtToken whereUuid($value)
  * @mixin \Eloquent
+ * @property string $token
+ * @method static \Illuminate\Database\Eloquent\Builder|JwtToken whereToken($value)
  */
 class JwtToken extends Model
 {
@@ -54,7 +56,7 @@ class JwtToken extends Model
         'permissions',
         'last_used_at',
         'expires_at',
-        'refreshed_at'
+        'refreshed_at',
     ];
 
     public function user(): BelongsTo

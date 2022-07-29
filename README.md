@@ -25,10 +25,16 @@ API Provider application for PET-SHOP
    openssl rsa -in private.pem -pubout -outform PEM -out public.pem
 ```
 
+### Run
+```bash
+    php artisan insights
+```
+
 ### Dev Tools
 
 ```html
     1. PHP CS FIXER
-    2. Grum PHP [code format check before commit] 
+2. Grum PHP [code format check before commit]
+3. PHP Insights
 ```
 

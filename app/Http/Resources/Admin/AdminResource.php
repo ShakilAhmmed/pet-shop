@@ -2,9 +2,6 @@
 
 namespace App\Http\Resources\Admin;
 
-use App\Http\Resources\TokenResource;
-use App\Services\JWTService\JWTService;
-use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
