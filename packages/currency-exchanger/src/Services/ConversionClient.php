@@ -7,7 +7,7 @@ use Shakilahmmed\CurrencyExchanger\DTO\CurrencyDTO;
 
 class ConversionClient
 {
-    protected $apiBaseUri;
+    protected $apiBaseUri = 'https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml';
 
     private const EUR = 'EUR';
 
@@ -19,7 +19,7 @@ class ConversionClient
     private function __construct(CurrencyDTO $currencyDTO)
     {
         $this->currencyDTO = $currencyDTO;
-        $this->apiBaseUri = config('currency-exchanger.exchanger_uri');
+//        $this->apiBaseUri = config('currency-exchanger.exchanger_uri');
         $xml = simpleXML_load_file($this->apiBaseUri, "SimpleXMLElement", LIBXML_NOCDATA);
         $xml = json_encode($xml);
         $this->xmlResponse = json_decode($xml, true);

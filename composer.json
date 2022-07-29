@@ -42,6 +42,7 @@
         "nunomaduro/collision": "^6.1",
         "nunomaduro/larastan": "^2.0",
         "nunomaduro/phpinsights": "^2.4",
+        "pestphp/pest-plugin-mock": "^1.0",
         "phpunit/phpunit": "^9.5.10",
         "spatie/laravel-ignition": "^1.0"
     },
