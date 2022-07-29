@@ -1,0 +1,31 @@
+{
+    "name": "shakilahmmed/currency-exchanger",
+    "description": "Package for Exchange Currency",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Shakilahmmed\\CurrencyExchanger\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Shakil Ahmmed",
+            "email": "shakilfci461@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "ext-libxml": "*"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Shakilahmmed\\CurrencyExchanger\\CurrencyExchangerServiceProvider"
+            ],
+            "aliases": {
+                "CurrencyExchanger": "Shakilahmmed\\CurrencyExchanger\\Facades\\CurrencyConversion"
+            }
+        }
+    }
+}

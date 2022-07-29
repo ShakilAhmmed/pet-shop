@@ -7,6 +7,15 @@
         "laravel"
     ],
     "license": "MIT",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "packages/currency-exchanger",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
     "require": {
         "php": "^8.1",
         "darkaonline/l5-swagger": "^8.3",
@@ -20,7 +29,8 @@
         "phpro/grumphp": "^1.13",
         "phpstan/phpstan": "^1.8",
         "squizlabs/php_codesniffer": "^3.7",
-        "ext-openssl": "*"
+        "ext-openssl": "*",
+        "shakilahmmed/currency-exchanger": "@dev",
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Shakilahmmed\CurrencyExchanger\Facades\CurrencyConversion;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    dd(CurrencyConversion::convert()->from('EUR')->to('USD')->amount(100)->get());
 });
