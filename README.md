@@ -70,6 +70,12 @@ API Provider application for PET-SHOP
             /api/v1/category/{categories:uuid}
 ```
 
+### Currency Converter Package
+
+```bash
+https://github.com/ShakilAhmmed/pet-shop/tree/master/packages/currency-exchanger
+```
+
 ### Run Code Analysis
 
 ```bash
