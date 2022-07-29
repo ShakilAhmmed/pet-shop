@@ -33,13 +33,11 @@ class AuthServiceProvider extends ServiceProvider
 
         Auth::viaRequest('jwt', function ($request) {
             $token = $request->bearerToken();
-
             if ($token && strlen($token) > 0) {
                 try {
                     $isInvalid = JwtToken::query()->where('token', $token)
                         ->whereNotNull('expires_at')
                         ->first();
-
                     if ($isInvalid) {
                         throw new InvalidTokenException('Token Expired');
                     }
@@ -50,10 +48,8 @@ class AuthServiceProvider extends ServiceProvider
                 } catch (Exception $e) {
                     return null;
                 }
-
                 return User::query()->where('uuid', $user['uuid'])->first();
             }
-
             return null;
         });
         //

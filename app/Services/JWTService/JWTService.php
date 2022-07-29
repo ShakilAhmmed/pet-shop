@@ -6,7 +6,7 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use OpenSSLAsymmetricKey;
 
-class JWTService
+final class JWTService
 {
     public const ALGO = 'RS256';
 
