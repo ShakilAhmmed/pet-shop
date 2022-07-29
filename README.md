@@ -70,6 +70,12 @@ API Provider application for PET-SHOP
             /api/v1/category/{categories:uuid}
 ```
 
+### API DOCS URI
+
+```bash
+    http://127.0.0.1:8000/api/docs
+```
+
 ### Currency Converter Package
 
 ```bash
