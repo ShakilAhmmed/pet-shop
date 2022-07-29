@@ -209,7 +209,7 @@ class AdminController extends Controller
             $sortBy = $request->query('sortBy');
             $isDesc = $request->query('desc', false);
 
-            $user = User::query()
+            $users = User::query()
                 ->user()
                 ->sort($sortBy, $isDesc)
                 ->when($request->query('first_name'), DefineFilter::with('first_name', $request->query('first_name')))
@@ -219,7 +219,7 @@ class AdminController extends Controller
                 ->when($request->query('created_at'), DefineFilter::with('created_at', $request->query('created_at')))
                 ->when($request->query('marketing'), DefineFilter::with('is_marketing', $request->query('marketing')))
                 ->paginate($limit);
-            return $this->successResponse(UserResource::collection($user), 'users fetched successfully');
+            return $this->successResponse(UserResource::collection($users), 'users fetched successfully');
         } catch (Exception $exception) {
             return $this->errorResponse($exception->getMessage());
         }
@@ -341,7 +341,6 @@ class AdminController extends Controller
      *     ),
      * ),
      */
-
     public function userDelete($uuid): JsonResponse
     {
         try {

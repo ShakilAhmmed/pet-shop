@@ -1,11 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\V1\Category\CategoryController;
 use App\Http\Controllers\API\V1\User\UserController;
 use App\Http\Controllers\API\V1\Admin\AdminController;
 use App\Http\Controllers\API\V1\Admin\Auth\AuthenticateController;
 use App\Http\Controllers\API\V1\User\Auth\UserAuthenticateController;
-
 
 
 /*
@@ -34,5 +34,12 @@ Route::group(['prefix' => '/v1'], function () {
         Route::post('/login', [UserAuthenticateController::class, 'login']);
         Route::post('/logout', [UserAuthenticateController::class, 'logout'])
             ->middleware('auth:api');
+    });
+    Route::get('/categories', [CategoryController::class, 'index'])->middleware('auth:api');
+    Route::group(['prefix' => '/category', 'middleware' => 'auth:api'], function () {
+        Route::post('/create', [CategoryController::class, 'store']);
+        Route::get('/{category:uuid}', [CategoryController::class, 'show']);
+        Route::put('/{category:uuid}', [CategoryController::class, 'update']);
+        Route::delete('/{category:uuid}', [CategoryController::class, 'destroy']);
     });
 });
