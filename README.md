@@ -16,6 +16,7 @@ API Provider application for PET-SHOP
     composer install
     php artisan key:generate
     php artisan migrate
+    php artisan db:seed
 ```
 
 ### Generate Private and Public Keys [ which are already present]
@@ -82,10 +83,16 @@ API Provider application for PET-SHOP
 https://github.com/ShakilAhmmed/pet-shop/tree/master/packages/currency-exchanger
 ```
 
-### Run Code Analysis
+### Run Code Analysis [must be into docker container]
 
 ```bash
+    sudo docker exec -it pet-shop-application bash
     php artisan insights
+```
+### Run Tests [must be into docker container]
+```bash
+    sudo docker exec -it pet-shop-application bash
+    ./vendor/bin/pest
 ```
 
 ### Dev Tools
